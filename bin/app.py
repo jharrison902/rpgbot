@@ -5,6 +5,7 @@ sys.path.append('lib/')
 from rpgclient import RpgClient
 from rpgdb import RpgDB
 import argparse
+from getpass import getpass
 
 #TODO: add start up args
 #TODO: config files?
@@ -17,8 +18,10 @@ def main():
     parser.add_argument("-d", "--description", help="The description of the bot.", type=str)
     parser.add_argument("-b", "--database", help="Database File Path.")
     parser.add_argument("-v", "--version", help="Display the version information.")
+    parser.add_argument("-i", "--interactive", help="Interactively enter your token", action="store_true")
+    parser.add_argument("-c", "--channel", help="Channel to join on server", type=str)
     args = parser.parse_args()
-    if not args.token:
+    if not args.token and not args.interactive:
         print("No token supplied. Exiting...")
     elif not args.database:
         print("No database path supplied. Exiting...")
@@ -28,6 +31,12 @@ def main():
         rpgDB = RpgDB(args.database)
         rpgClient = RpgClient(rpgDB, args.tag, args.description)
         #TODO: start client with token
+        token = None
+        if args.interactive:
+            token = getpass(prompt='Token:')
+        else:
+            token = args.token
+        rpgClient.startup(token)
         
         #END
         del rpgClient
