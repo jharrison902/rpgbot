@@ -3,12 +3,12 @@
 import discord
 from discord.ext import commands
 import asyncio
-import rpgdb
+from rpgdb import RpgDB
 
 class RpgClient:
     
     #constructor
-    def __init__(self, notice_tag="!rpg", description="RPG Bot", db : RpgDB):
+    def __init__(self, db : RpgDB, notice_tag="!rpg", description="RPG Bot"):
         self.notice_tag=notice_tag
         self.description = description
         self.db = db
