@@ -42,12 +42,16 @@ class RpgClient:
         #join game
         @self.bot.command(pass_context=True)
         @asyncio.coroutine
-        def delete_game(ctx, game_name : str):
+        def join_game(ctx, game_name : str):
             #TODO: add user to game
             print("ADDING USER {} TO GAME {}".format(ctx.message.author, game_name))
         
         #TODO: add more commands
-            
+    
+    #Destroy method
+    def __del__(self):
+        if self.bot:
+            self.bot.close()
     
         
         

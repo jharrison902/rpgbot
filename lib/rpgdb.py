@@ -11,7 +11,7 @@ class RpgDB:
     instance = None
     def __init__(self, database_str):
         if not RpgDB.instance:
-            RpgDB.instance = __RpgDB(database_str)
+            RpgDB.instance = RpgDB.__RpgDB(database_str)
         else:
             RpgDB.instance.database_str = database_str
     def __getattr(self, name):
