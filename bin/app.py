@@ -38,6 +38,7 @@ def main():
             token = args.token
         rpgClient.startup(token)
         
+        
         #END
         del rpgClient
         del rpgDB
