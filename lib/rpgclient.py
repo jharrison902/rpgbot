@@ -4,6 +4,7 @@ import discord
 import asyncio
 import sys
 from rpgdb import RpgDB
+from rpgdice.rpgdie import RpgDie
 
 class RpgClient:
     
@@ -80,6 +81,19 @@ class RpgClient:
         games = self.db.get_game(game_name, message.channel.server.name, message.channel.name)
         yield from self.bot.send_message(message.channel, "GAMES:\n{}".format("\n".join(list(map(lambda g: g.game_name, games)))))
         
+        
+    #roll di(c)e
+    @asyncio.coroutine
+    def roll(self, message, dice_expression):
+        print("ROLLING {}".format(dice_expression))
+        dice = RpgDie(dice_expression)
+        try:
+            result = dice.rollDie()
+            print("DICE RESULT {}".format(result[0]))
+            yield from self.bot.send_message(message.channel, "RESULT: {}".format(result[0]))
+        except:
+            print("DICE FAILED")
+            yield from self.bot.send_message(message.channel, "FAILED TO ROLE: {}! PLEASE NOTIFY ADMINISTRATOR.".format(dice_expression))
     #delete game
     
     @asyncio.coroutine
