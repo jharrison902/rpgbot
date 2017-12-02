@@ -6,7 +6,7 @@ import random
 #commonly represented in string as NdD
 class RpgDie:
     
-    __regex = '(\+?[0-9]+(?:d[0-9]+)?)'
+    __regex = r'(\+?[0-9]+(?:d[0-9]+)?)'
     def combiner(x,y):
         return list(map(lambda a,b:a+b, x,y))
     
